@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>Bing Search</title>
+	<style>
+	    body{
+	       /*background-color: #333;*/
+	    }
+	    .bg-div{
+	        min-width: 1200px;
+	        min-height: 800px;
+	        margin: 0 auto;
+	        background: url(img/river.jpg) no-repeat center center;
+	        position: relative;
+	    }
+	    .logo{
+	        background: url(img/logo.png);
+	        width: 107px;
+	        height: 53px;	
+	        float: left;    
+	        margin: -5px 18px 0 0;    
+	    }
+	    form{
+	        float: left;
+	        background-color: #fff;
+	        padding: 5px;
+	    }
+	    .search-input-text, .search-input-button{
+	        border: 0;
+	        float: left;    /*搜索框与搜索按钮对齐*/
+	    }
+	    .search-input-text{
+	        height: 28px;
+	        line-height: 28px;
+	        outline: none;  /*去掉搜索框边框*/
+	        width: 350px;
+	        font-size: 20px;
+	    }
+	    .search-input-button{
+	        background-image: url(img/search-button.png);
+	        width: 29px;
+	        height: 29px;
+	    }
+	    .search-box{
+	        position: absolute;    /*相对于.bg-div定位*/
+	        top: 45%;
+	        left: 30%;	        
+	    }
+	    .suggest{
+	        width: 387px;
+	        border: 1px solid #aaa;
+	        background-color: #fff;
+	    }
+	    .suggest ul{
+	        list-style: none;
+	        margin: 0;
+	        padding: 0;
+	    }
+	    .suggest ul li{
+	        padding: 3px;
+	        font-size: 14px;
+	        line-height: 25px;
+	        cursor: pointer;
+	    }
+	    .suggest ul li:hover{
+	        background: #eee;
+	        text-decoration: none;
+	    }
+	    
+	</style>
+</head>
+<body>
+    <div class="bg-div">
+        <div class="search-box">
+            <div class="logo"></div>
+            <form action="" id="search-form">
+                <input type="text" class="search-input-text" id="search_input" />
+                <input type="submit" class="search-input-button" value="" />
+            </form>
+        </div>
+    </div>
+    <!--智能提示列表-->
+    <div class="suggest" id="search-suggest" style="display: none;">
+        <ul>
+            <li>提示词1</li>
+            <li>提示词2</li>
+            <li>提示词3</li>
+            <li>提示词4</li>
+        </ul>
+    </div>
+</body>
+<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+<script>
+    $('#search_input').bind('keyup', function(){
+        var searchText = $('#search_input').val();
+        // ajax
+        $.get('https://api.bing.com/qsonbs.aspx?q=' + searchText,function (data){
+            //
+        },'json');
+        
+        // 提示框
+        $('#search-suggest').show().css({
+            top : $('#search-form').offset().top + $('#search-form').height() + 10,
+            left : $('#search-form').offset().left,
+            position : 'absolute'
+        }); 
+    });
+    // 当用户点击浏览器任意一处位置的时候，提示框消失
+    $(document).bind('click', function(){
+        $('#search-suggest').hide();
+    });    
+    
+</script>
+</html>
