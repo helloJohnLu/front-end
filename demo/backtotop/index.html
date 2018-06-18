@@ -20,7 +20,7 @@
         margin-bottom: 30px;
         text-align: center;
     }
-    #top {
+/*    #top {
         width: 43px;
         height: 43px;
         background: url("images/top.png") no-repeat;
@@ -30,11 +30,33 @@
         bottom: 30px;
         display: none;
         cursor: pointer;
+    }*/
+    #top2 {
+        font-size: 50px;
+        color: #fff;
+        position: fixed;
+        right: 20px;
+        bottom: 60px;
+        /*display: none;*/
+        cursor: pointer;
+    }
+    #round {
+        background-color: #666;
+        width: 50px;
+        position: fixed;
+        height: 50px;
+        right: 14px;
+        bottom: 75px;
+        border-radius: 50%;
+        display: none;
     }
 </style>
 </head>
 <body>
-    <span id="top"></span>
+    <!--<span id="top"></span>-->
+    <div id="round">
+        <span id="top2">^</span>
+    </div>
     <p>今天天气很好</p>
     <p>今天天气很好</p>
     <p>今天天气很好</p>
@@ -97,12 +119,12 @@
             scrollTop = scroll().top;
 
             // 1.2、显示 / 隐藏
-            scrollTop > 0 ? show($('top')) : hide($('top'));
+            scrollTop > 0 ? show($('round')) : hide($('round'));
             begin = scrollTop;
         };
 
         // 2、监听点击
-        $('top').onclick = function () {
+        $('round').onclick = function () {
             // 2.1、清除定时器
             clearInterval(timer);
 
