@@ -7,37 +7,40 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>顶部导航吸附</title>
     <style>
-        .container {
-            max-width: 1900px;
-            margin: 0 auto;
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
         }
         #header, #nav {
-            width: 100%;
             margin: 0 auto;
         }
+        img {
+            vertical-align: top;
+            width: 100%;
+        }
         #content {
-            width: 70%;
+            width: 60%;
             margin: 50px auto;
         }
         .nav{
             position: fixed;
             top: 0;
+            width: 100%;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div id="header">
-            <img src="images/top.png" alt="">
-        </div>
-        <div id="nav">
-            <img src="images/nav.png" alt="">
-        </div>
-        <div id="content">
-            <img src="images/content1.png" alt="">
-            <img src="images/content2.png" alt="">
-        </div>
-    </div>
+<div id="header">
+    <img src="images/top.png" alt="">
+</div>
+<div id="nav">
+    <img src="images/nav.png" alt="">
+</div>
+<div id="content">
+    <img src="images/content1.png" alt="">
+    <img src="images/content2.png" alt="">
+</div>
 </body>
 <script>
     window.onload = function () {
