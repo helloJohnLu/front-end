@@ -1,0 +1,175 @@
+<!doctype html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>back to top</title>
+<style>
+    *{
+        margin: 0;
+        padding:0;
+        border: none;
+        list-style: none;
+    }
+    body {
+        background-color: #efefef;
+    }
+    p{
+        font-size: 16px;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+    #top {
+        width: 43px;
+        height: 43px;
+        background: url("images/top.png") no-repeat;
+        background-size: 100% 100%;
+        position: fixed;
+        right: 10px;
+        bottom: 30px;
+        display: none;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+    <span id="top"></span>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+    <p>今天天气很好</p>
+</body>
+<script>
+    window.onload = function () {
+        var scrollTop = 0, begin = 0, end = 0, timer = null;
+
+        // 1、监听窗口滚动
+        window.onscroll = function () {
+            // 1.1、获取滚动高度
+            scrollTop = scroll().top;
+
+            // 1.2、显示 / 隐藏
+            scrollTop > 0 ? show($('top')) : hide($('top'));
+            begin = scrollTop;
+        };
+
+        // 2、监听点击
+        $('top').onclick = function () {
+            // 2.1、清除定时器
+            clearInterval(timer);
+
+            // 2.2、缓动位移
+            timer = setInterval(function () {
+                begin += (end - begin) / 15;
+                window.scrollTo(0, begin);
+
+                // 清除定时器
+                if (Math.round(begin) === end){
+                    clearInterval(timer);
+                }
+
+                console.log(begin, end);
+            }, 20);
+        }
+    }
+
+    function $(id) {
+        return typeof id === 'string' ? document.getElementById(id) : null;
+    }
+
+    /**
+     * 使用 json 封装 scroll 偏移量属性
+     * 求 top 偏移：scroll().top
+     * 求 left 偏移：scroll().left
+     *
+     * @returns {*}
+     */
+    function scroll() {
+        if (window.pageYOffset !== null){
+            return {
+                top : window.pageYOffset,
+                left : window.pageXOffset,
+            };
+        }else if (document.compatMode === 'CSS1Compat'){
+            return {
+                top : document.documentElement.scrollTop,
+                left : document.documentMode.scrollLeft,
+            };
+        }
+
+        return {
+            top : document.body.scrollTop,
+            left : document.body.scrollLeft
+        };
+    }
+
+
+    /**
+     * 显示元素
+     * @param obj
+     *
+     * @returns {string}
+     */
+     function show(obj) {
+        return obj.style.display = 'block';
+     }
+
+    /**
+     * 隐藏元素
+     *
+     * @param obj
+     * @returns {string}
+     */
+     function hide(obj) {
+         return obj.style.display = '';
+     }
+</script>
+</html>
