@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>顶部导航吸附</title>
+    <style>
+        .container {
+            max-width: 1900px;
+            margin: 0 auto;
+        }
+        #header, #nav {
+            width: 100%;
+            margin: 0 auto;
+        }
+        #content {
+            width: 70%;
+            margin: 50px auto;
+        }
+        .nav{
+            position: fixed;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="header">
+            <img src="images/top.png" alt="">
+        </div>
+        <div id="nav">
+            <img src="images/nav.png" alt="">
+        </div>
+        <div id="content">
+            <img src="images/content1.png" alt="">
+            <img src="images/content2.png" alt="">
+        </div>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        // 1、导航的偏移量
+        var navOffsetTop = $('nav').offsetTop;
+
+        // 2、网页被卷起的高度
+        window.onscroll = function () {
+            var pageScrollTop = scroll().top;
+
+            // 2.1、如果网页被卷起的高度等于或大于导航的偏移量，则进行吸附
+            if (pageScrollTop >= navOffsetTop){
+                $('nav').className = 'nav';
+            }else{
+                $('nav').className = '';
+            }
+        }
+    }
+
+    function $(id) {
+        return typeof id === 'string' ? document.getElementById(id) : null;
+    }
+
+    /**
+     * 使用 json 封装 scroll 偏移量属性
+     * 求 top 偏移：scroll().top
+     * 求 left 偏移：scroll().left
+     *
+     * @returns {*}
+     */
+    function scroll() {
+        if (window.pageYOffset !== null){
+            return {
+                top : window.pageYOffset,
+                left : window.pageXOffset,
+            };
+        }else if (document.compatMode === 'CSS1Compat'){
+            return {
+                top : document.documentElement.scrollTop,
+                left : document.documentElement.scrollLeft,
+            };
+        }
+
+        return {
+            top : document.body.scrollTop,
+            left : document.body.scrollLeft,
+        };
+    }
+</script>
+</html>
