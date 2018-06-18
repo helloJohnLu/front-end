@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>侧边广告</title>
+	<style type="text/css">
+        *{
+            margin: 0;
+            padding: 0;
+            border: none;
+            list-style: none;
+        }
+        img{
+            width: 100%;
+        }
+        #aside{
+            width: 150px;
+            position: absolute;
+            top: 200px;
+            left: 0;
+        }
+        p{
+            text-align: center;
+            font-size: 20px;
+            height: 50px;
+        }
+	</style>
+</head>
+<body>
+    <div id="aside">
+        <img src="images/float.jpg" alt="" />
+    </div>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+    <p>这里是内容……</p>
+</body>
+<script type="text/javascript">
+    window.onload = function (){
+        // 1、获取出侧边幅的offsetTop
+        var asideOffsetTop = $('aside').offsetTop;
+        
+        var end = 0, begin = 0, timer = '';
+        // 2、监听窗口滚动
+        window.onscroll = function (){
+            // 2.5、清除定时器
+            clearInterval(timer);
+            
+            // 2.1、获取网页卷起的高度
+            var asideScrollTop = scroll().top;
+            
+            // 2.2、悬挂偏移高度
+            end = asideOffsetTop + asideScrollTop;
+            
+            // 2.3、缓动动画
+            timer = setInterval(function (){
+                begin += (end - begin) * 0.2;
+                $('aside').style.top = begin + 'px';
+
+                // 2.4、清除定时器
+                if (Math.round(begin) === end) {
+                    clearInterval(timer);
+                }
+            }, 20);
+            
+    
+        }
+    }
+	
+	/**
+	 * 使用 json 封装 scroll 偏移量属性
+     * 求 top 偏移：scroll().top
+     * 求 left 偏移：scroll().left
+     * 
+	 * @returns {*}
+	 */
+	function scroll(){
+	    if (window.pageYOffset !== null) {
+	        return {
+	            top : window.pageYOffset,
+	            left : window.pageXOffset,
+	        };
+	    }else if (document.compatMode === 'CSS1Compat') {
+	    	return {
+	    	    top : document.documentElement.scrollTop,
+	    	    left : document.documentElement.scrollLeft,
+	    	};
+	    }
+	    
+	    return {
+	        top : document.body.scrollTop,
+	        left : document.body.scrollLeft,
+	    };
+	}
+	
+	function $(id){
+	    return typeof id === 'string' ? document.getElementById(id) : null;
+	}
+</script>
+</html>
