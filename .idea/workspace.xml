@@ -40,9 +40,11 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/demo/waterfall/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="8" column="116" lean-forward="false" selection-start-line="8" selection-start-column="116" selection-end-line="8" selection-end-column="116" />
-              <folding />
+            <state relative-caret-position="481">
+              <caret line="156" column="8" lean-forward="false" selection-start-line="156" selection-start-column="8" selection-end-line="156" selection-end-column="116" />
+              <folding>
+                <marker date="1529393452899" expanded="true" signature="6170:6278" ph="/*...*/" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -293,12 +295,12 @@
       <workItem from="1529132976788" duration="6828000" />
       <workItem from="1529317076242" duration="809000" />
       <workItem from="1529331387781" duration="13716000" />
-      <workItem from="1529392366617" duration="654000" />
+      <workItem from="1529392366617" duration="952000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="75230000" />
+    <option name="totallyTimeSpent" value="75528000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -607,9 +609,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/demo/waterfall/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="8" column="116" lean-forward="false" selection-start-line="8" selection-start-column="116" selection-end-line="8" selection-end-column="116" />
-          <folding />
+        <state relative-caret-position="481">
+          <caret line="156" column="8" lean-forward="false" selection-start-line="156" selection-start-column="8" selection-end-line="156" selection-end-column="116" />
+          <folding>
+            <marker date="1529393452899" expanded="true" signature="6170:6278" ph="/*...*/" />
+          </folding>
         </state>
       </provider>
     </entry>
