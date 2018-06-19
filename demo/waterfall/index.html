@@ -5,6 +5,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 	<title>Document</title>
+	<script>
+        var clientWidth = document.documentElement.clientWidth > 1212 ? 1212 : document.documentElement.clientWidth;
+	</script>
 	<style type="text/css">
 		*{
 			margin: 0;
@@ -154,7 +157,7 @@
         var boxWidth = allBox[0].offsetWidth;
 
         //1.3、内容区的宽度
-        var clientWidth = document.documentElement.clientWidth > 1212 ? 1212 : document.documentElement.clientWidth;
+        /*var clientWidth = document.documentElement.clientWidth > 1212 ? 1212 : document.documentElement.clientWidth;*/
 
         //1.4、求出列数
         var cols = parseInt(clientWidth / boxWidth);
