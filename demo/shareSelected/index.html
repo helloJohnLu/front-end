@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+<title>微博分享</title>
+<style type="text/css">
+    *{
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+	p{
+	    width: 300px;
+        margin: 20px auto;
+        line-height: 1.8;
+	}
+    #box {
+        margin-top: 100px;
+        font-size: 16px;
+    }
+    #share_weibo {
+        width: 26px;
+        height: 26px;
+        background: url("images/share.gif");
+        position: absolute;
+        display: none;
+        cursor: pointer;
+    }
+</style>
+</head>
+<body>
+    <div id="box">
+        <p>这座城市，动物们大摇大摆走在街头。我每天上班下班都会路过特宁湖，鸭子们喋喋不休吵架。吵得深仇大恨，朝彼此的屁股咬下去。不过，最后总会有一只天鹅大姐来伸张正义。</p>
+        <p>从来没有喝过那么好喝的自来水。因为去买了一瓶超市的矿泉水，被房东教育了一顿，“你知道其实就是自来水吗！”冰岛人都是直接拧开自来水，咕咚咕咚喝下肚。</p>
+        <p>每天早晨，我养成了认真读新闻的习惯，因为冰岛新闻本身就是个笑话。</p>
+    </div>
+    <a id="share_weibo" href="javascript:;" target="_blank"></a>
+</body>
+<script type="text/javascript">
+
+    var selectedText;
+
+	window.onload = function () {
+        $('box').onmouseup = function (event) {
+            // 1.0、兼容
+            var e = event || window.event;
+
+            // 1、获取选中的文字
+            if (window.getSelection){   // 标准模式，获取选中的文字
+                selectedText = window.getSelection().toString();
+            }else{      // IE 系列
+                selectedText = document.selection.createRange().text;
+            }
+
+            if (selectedText !== ''){
+                // 1.2、显示面板
+                $('share_weibo').style.display = 'block';
+
+                // 1.3、定位
+                $('share_weibo').style.left = e.clientX + 'px';
+                $('share_weibo').style.top = e.clientY + 'px';
+            }
+        }
+
+        // 2、监听文档的点击
+        document.onmousedown = function (event) {
+            var e = event || window.event;
+
+            // 2.1、获取点击区域的ID
+            var targetId = e.target ? e.target.id : e.srcElement.id;
+
+            // 2.2、判断
+            if (targetId !== 'share_weibo'){
+                $('share_weibo').style.display = 'none';
+            }else{  // 分享微博
+                 $('share_weibo').href = 'http://v.t.sina.com.cn/share/share.php?searchPic=false&title=' + selectedText + '&url=http://front-end.johnlu.me/';
+            }
+
+            // 防止拖动时选中内容
+            window.getSelection() ? window.getSelection().removeAllRanges() : document.selection.empty();
+        }
+    }
+
+    function $(id) {
+        return typeof id === 'string' ? document.getElementById(id) : null;
+    }
+</script>
+</html>
