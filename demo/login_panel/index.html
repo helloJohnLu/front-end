@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        html,body {
+            width: 100%;
+            height: 3000px;
+        }
+        #panel {
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            opacity: 0.5;
+            filter: alpha(opacity: 40);  /*IE678 兼容性*/
+
+            position: absolute;
+            left: 0;
+            top: 0;
+
+            display: none;
+        }
+        #login {
+            width: 300px;
+            height: 260px;
+            background-color: skyblue;
+            border-radius: 5px;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            margin-left: -150px;
+            margin-top: -150px;
+
+            display: none;
+        }
+        form {
+            padding: 20px;
+        }
+        input {
+            width: 100%;
+            height: 30px;
+            margin-top: 30px;
+            border-radius: 5px;
+            border: none;
+            padding-left: 10px;
+        }
+        #btn {
+            float: right;
+            position: absolute;
+            top: 30px;
+            right: 100px;
+            background-color: orangered;
+            border: none;
+            width: 50px;
+            height: 30px;
+            color: #ffffff;
+            border-radius: 6px;
+            outline: none;
+            cursor: pointer;
+        }
+        input[type = 'submit'] {
+            cursor: pointer;
+            background-color: darkorange;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <button id="btn">登录</button>
+    <div id="panel"></div>
+    <div id="login">
+        <form action="./admin.html">
+            <h3>登录</h3>
+            <input type="text" name="username" placeholder="请输入用户名">
+            <input type="text" name="username" placeholder="请输入密码">
+            <input type="submit" value="登 录">
+        </form>
+    </div>
+</body>
+<script>
+    window.onload = function () {
+        // 1、监听按钮点击事件
+        $('btn').onclick = function (event) {
+            // 显示面板与蒙版
+            $('panel').style.display = 'block';
+            $('login').style.display = 'block';
+
+            // 隐藏滚动条
+            document.body.style.overflow = 'hidden';
+
+            // 阻止冒泡事件
+            if (event.stopPropagation) {
+                event.stopPropagation();
+            }else{
+                event.cancelBubble = true;
+            }
+        };
+
+        // 2、监听文档点击事件
+        document.onclick = function () {
+            $('panel').style.display = 'none';
+            $('login').style.display = 'none';
+
+            // 显示滚动条
+            document.body.style.overflow = 'auto';
+        };
+
+        // 3、监听表单点击事件
+        $('login').onclick = function (event) {
+            event = event || window.event;
+
+            // 阻止冒泡事件
+            if (event.stopPropagation) {
+                event.stopPropagation();
+            }else{
+                event.cancelBubble = true;
+            }
+        }       
+    }
+
+    function $ (id) {
+        return typeof id === 'string' ? document.getElementById(id) : null;
+    }
+</script>
+</html>
