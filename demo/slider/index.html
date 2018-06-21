@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            border: none;
+        }
+        img {
+            vertical-align: top;
+        }
+        #slider {
+            width: 1100px;
+            height: 500px;
+            margin: 100px auto;
+            position: relative;
+        }
+        #top {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        #top ul {
+            width: 5500px;
+            height: 100%;
+            position: absolute;
+            float: left;
+        }
+        #top ul li {
+            width: 1100px;
+            height: 500px;
+            float: left;
+        }
+        #slider ol {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+        #slider ol li {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: darkgray;
+            display: inline-block;
+            margin-left: 3px;
+            cursor: pointer;
+        }
+        #slider ol li.active {
+            background-color: orangered;
+        }
+    </style>
+</head>
+<body>
+    <div id="slider">
+        <div id="top">
+            <ul id="ul">
+                <li><img src="images/img1.png" alt=""></li>
+                <li><img src="images/img2.png" alt=""></li>
+                <li><img src="images/img3.png" alt=""></li>
+                <li><img src="images/img4.png" alt=""></li>
+            </ul>
+        </div>
+        <ol id="ol"></ol>
+    </div>
+</body>
+<script src="js/func.js"></script>
+<script>
+    window.onload = function () {
+        // 1、获取需要的标签
+        var lis = $('ul').children;
+        var currentIndex = 0, indicatorIndex = 0;
+
+        // 2、克隆 li 标签
+        $('ul').appendChild(lis[0].cloneNode(true));
+
+        // 3、根据轮播图数量动态创建小圆点
+        for (var i = 0; i < lis.length - 1; i++){
+            var li = document.createElement('li');
+            $('ol').appendChild(li);
+        }
+
+        // 4、第一个圆点被选中
+        $('ol').children[0].className = 'active';
+
+        // 5、监听鼠标进入圆点
+        var olLis = $('ol').children;
+        for (var j = 0; j < olLis.length; j++){
+            // 避免同步与异步产生的问题
+            (function (j) {
+                var li = olLis[j];
+
+                // 5.2、鼠标进入
+                li.onmouseover = function () {
+                    // 排他
+                    for (var i = 0; i < olLis.length; i++){
+                        olLis[i].className = '';
+                    }
+                    // 独有
+                    this.className = 'active';
+
+                    // 5.3、图片滚动
+                    constant($('ul'), -(1100 * j), 100);
+
+                    currentIndex = indicatorIndex = j;
+                }
+            })(j);
+        }
+
+        // 6、自动轮播
+        var timer = setInterval(autoPlay, 2000);
+
+        // 7、清除和设置定时器
+        $('slider').onmouseover = function () {
+            clearInterval(timer);
+        }
+
+        $('slider').onmouseout = function () {
+            timer = setInterval(autoPlay, 2000);
+        }
+
+
+        /**
+         * 图片轮播
+         */
+        function autoPlay() {
+            // 6.1、ul 滚动
+            currentIndex += 1;
+
+            // 判断边界
+            if (currentIndex > lis.length -1){
+                $('ul').style.left = 0;
+                currentIndex = 1;   // 第二张
+            }
+
+            // 6.2、指示器（ol）滚动
+            indicatorIndex += 1;
+            if (indicatorIndex > olLis.length - 1){
+                indicatorIndex = 0;
+            }
+            for (var i = 0; i < olLis.length; i++){
+                olLis[i].className = '';
+            }
+            olLis[indicatorIndex].className = 'active';
+
+            constant($('ul'), -(currentIndex * 1100), 100);
+
+        }
+    }
+</script>
+</html>
