@@ -14,7 +14,7 @@ function constant (obj, target, speed) {
     var dir = obj.offsetLeft < target ? speed : -speed;
 
     // 2、设置定时器
-    obj.timer = setInterval(function (argument) {
+    obj.timer = setInterval(function () {
         obj.style.left = obj.offsetLeft + dir + 'px';
 
         if (Math.abs(target - obj.offsetLeft) < Math.abs(dir)) {
