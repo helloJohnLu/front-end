@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+	<title>楼层</title>
+	<style>
+	    *{
+	        margin: 0;
+	        padding: 0;
+	        list-style: none;
+	        border: none;
+	    }
+        html, body{
+            width: 100%;
+            height: 100%;
+        }
+        #box {
+            width: 70%;
+            height: 100%;
+            margin: 0 auto;
+            position: relative;
+        }
+	    #floor{
+	        width: 100%;
+	        height: 100%;
+	    }
+	    #floor div{
+	        width: 100%;
+	        height: 100%;
+	        text-align: center;
+	        font-size: 2rem;
+            color: #fff;
+	    }
+        #gps{
+            position: absolute;
+            left: -90px;
+            top: 40%;
+        }
+	    #ol{
+	        position: fixed;
+            background-color: #666;
+            width: 80px;
+            border: solid 1px #eee;
+	    }
+        #ol li {
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            color: #fff;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+        }
+        #ol li:hover {
+            background-color: lightcoral;
+        }
+        #ol li.current {
+            background-color: lightseagreen;
+        }
+	</style>
+</head>
+<body>
+    <div id="box">
+        <!--GPS-->
+        <div id="gps">
+            <ol id="ol">
+                <li class="current">第 1 层</li>
+                <li>第 2 层</li>
+                <li>第 3 层</li>
+                <li>第 4 层</li>
+                <li>第 5 层</li>
+            </ol>
+        </div>
+        <!--主体内容-->
+        <div id="floor">
+            <div>第 1 层</div>
+            <div>第 2 层</div>
+            <div>第 3 层</div>
+            <div>第 4 层</div>
+            <div>第 5 层</div>
+        </div>
+    </div>
+</body>
+<script src="js/func.js"></script>
+<script>
+    window.onload = function () {
+        // 1、获取需要的标签
+        var ol = $('ol');
+        var floor = $('floor');
+        var floor_divs = floor.children;
+        var ol_lis = ol.children;
+
+        var isClick = false;
+
+        // 2、楼层上背景色
+        var colors = ['purple', 'darkgreen', 'orange', 'red', 'blue',];
+        for (var i = 0; i < colors.length; i++){
+            floor_divs[i].style.backgroundColor = colors[i];
+        }
+
+        // 3、监听 GPS 点击
+        for (var j = 0; j < ol_lis.length; j++){
+            (function (index) {
+                var ol_li = ol_lis[index];
+                // 3.1、监听点击
+                ol_li.onclick = function () {
+
+                    isClick = true;
+
+                    // 排它
+                    for (var i = 0; i < ol_lis.length; i++){
+                        ol_lis[i].className = '';
+                    }
+
+                    this.className = 'current';
+
+                    // 3.2、内容滚动
+                    buffer(
+                        document.documentElement,
+                        {scrollTop : index * document.documentElement.offsetHeight},
+                        function () {
+                            isClick = false;
+                    });
+                }
+            })(j);
+        }
+
+        // 4、监听页面滚动
+        window.onscroll = function () {
+            if (!isClick){
+                // 4.1、获取滚动产生的高度
+                var scrollTop = Math.ceil(scroll().top);
+
+                // 4.2、遍历
+                for (var i = 0; i < ol_lis.length; i++){
+                    // 4.3、如果网页被卷起的高度大于楼层的偏移高度
+                    if (scrollTop >= floor_divs[i].offsetTop){
+                        for (var j = 0; j < ol_lis.length; j++){
+                            ol_lis[j].className = '';
+                        }
+                        ol_lis[i].className = 'current';
+                    }
+                }
+            }
+        }
+
+    }
+</script>
+</html>
