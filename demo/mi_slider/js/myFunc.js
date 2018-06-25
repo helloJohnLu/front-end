@@ -73,7 +73,6 @@ function constant(obj, target, speed) {
             clearInterval(obj.timer);
 
             obj.style.left = target + "px";
-            console.log(obj.offsetLeft, target);
         }
     }, 20);
 
@@ -139,8 +138,6 @@ function buffer(obj, json, fn) {
                 obj.style[k] = begin + speed + "px";
             }
 
-            console.log(begin, target);
-
             // 1.5 判断
             if(begin !== target){
                 flag = false;
@@ -150,8 +147,6 @@ function buffer(obj, json, fn) {
         // 1.3 清除定时器
         if(flag){
             clearInterval(obj.timer);
-
-            console.log(fn);
 
             // 判断有没有回调函数
             if(fn){
