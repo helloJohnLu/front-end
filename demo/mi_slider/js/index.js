@@ -6,7 +6,7 @@ window.onload = function () {
     var slider_ctl = $('slider_ctl');
 
     // 图片索引
-    var index = 0
+    var index = 0;
 
     // 2、动态创建指示器
     for (var i = 0; i < slider_main_img.length; i++){
