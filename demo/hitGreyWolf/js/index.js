@@ -57,7 +57,7 @@ $(function() {
                 // 停止灰太狼动画
                 stopWolfAnimation();
             }
-        }, 200);
+        }, 100);
     }
 
     var wolfTimer;  // 灰太狼动画定时器
